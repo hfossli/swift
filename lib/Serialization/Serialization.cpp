@@ -1563,6 +1563,7 @@ static uint8_t getRawStableAccessibility(Accessibility access) {
   CASE(FilePrivate)
   CASE(Internal)
   CASE(Public)
+  CASE(Open)
 #undef CASE
   }
 }
@@ -3794,7 +3795,7 @@ static void writeDeclCommentTable(
         // we want to take the testability state into account
         // and emit documentation if and only if they are visible to clients
         // (which means public ordinarily, but public+internal when testing enabled).
-        if (VD->getEffectiveAccess() != Accessibility::Public)
+        if (VD->getEffectiveAccess() < Accessibility::Public)
           return true;
       }
 
